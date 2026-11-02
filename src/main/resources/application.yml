@@ -46,7 +46,7 @@ management:
       exposure:
         include: health,info,metrics
 
-# ── OpenAPI ──
+# ── OpenAPI 5-Hospital Multi-Tenant Support ──
 springdoc:
   api-docs:
     path: /v3/api-docs

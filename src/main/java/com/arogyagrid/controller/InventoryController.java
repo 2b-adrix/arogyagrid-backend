@@ -3,6 +3,7 @@ package com.arogyagrid.controller;
 import com.arogyagrid.dto.request.InventoryTransactionRequest;
 import com.arogyagrid.dto.response.ApiResponse;
 import com.arogyagrid.dto.response.InventoryResponse;
+import com.arogyagrid.dto.response.NearestFacilityResponse;
 import com.arogyagrid.service.InventoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,14 @@ public class InventoryController {
         } else {
             data = inventoryService.getAllBalances();
         }
+        return ResponseEntity.ok(ApiResponse.ok(data));
+    }
+
+    @GetMapping("/nearest")
+    public ResponseEntity<ApiResponse<List<NearestFacilityResponse>>> getNearestSurplus(
+            @RequestParam String facilityId,
+            @RequestParam String medicineId) {
+        List<NearestFacilityResponse> data = inventoryService.getNearestSurplusFacilities(facilityId, medicineId);
         return ResponseEntity.ok(ApiResponse.ok(data));
     }
 

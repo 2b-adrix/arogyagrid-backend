@@ -2,6 +2,7 @@ package com.arogyagrid.service;
 
 import com.arogyagrid.dto.request.InventoryTransactionRequest;
 import com.arogyagrid.dto.response.InventoryResponse;
+import com.arogyagrid.dto.response.NearestFacilityResponse;
 import com.arogyagrid.entity.*;
 import com.arogyagrid.enums.TransactionType;
 import com.arogyagrid.exception.BadRequestException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,6 +43,48 @@ public class InventoryService {
         return balanceRepo.findByDistrict(district).stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
+    }
+
+    public List<NearestFacilityResponse> getNearestSurplusFacilities(String facilityId, String medicineId) {
+        Facility sourceFacility = facilityRepo.findById(facilityId)
+                .orElseThrow(() -> new ResourceNotFoundException("Facility", "id", facilityId));
+
+        List<InventoryBalance> allBalances = balanceRepo.findAll();
+
+        return allBalances.stream()
+                .filter(b -> b.getMedicine().getMedicineId().equals(medicineId))
+                .filter(b -> !b.getFacility().getFacilityId().equals(facilityId))
+                .filter(b -> b.getClosingStock() > 0)
+                .map(b -> {
+                    Facility target = b.getFacility();
+                    double dist = calculateHaversine(
+                            sourceFacility.getLatitude(), sourceFacility.getLongitude(),
+                            target.getLatitude(), target.getLongitude()
+                    );
+                    return NearestFacilityResponse.builder()
+                            .facilityId(target.getFacilityId())
+                            .facilityName(target.getName())
+                            .latitude(target.getLatitude())
+                            .longitude(target.getLongitude())
+                            .distanceKm(Math.round(dist * 10.0) / 10.0)
+                            .availableStock(b.getClosingStock())
+                            .address(target.getAddress())
+                            .contactPhone(target.getContactPhone())
+                            .build();
+                })
+                .sorted(Comparator.comparingDouble(NearestFacilityResponse::getDistanceKm))
+                .collect(Collectors.toList());
+    }
+
+    private double calculateHaversine(double lat1, double lon1, double lat2, double lon2) {
+        final int R = 6371; // Earth radius in km
+        double latDistance = Math.toRadians(lat2 - lat1);
+        double lonDistance = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
     }
 
     @Transactional
