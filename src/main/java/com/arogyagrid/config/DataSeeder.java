@@ -29,11 +29,11 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (userRepo.count() > 0) {
-            log.info("Database already seeded. Skipping...");
+            log.info("Database already populated. Skipping seeding...");
             return;
         }
 
-        log.info("🌱 Seeding database...");
+        log.info("🌱 Seeding Jaipur Multi-Hospital Health Grid Dataset...");
         seedUsers();
         seedFacilities();
         seedMedicines();
@@ -41,7 +41,7 @@ public class DataSeeder implements CommandLineRunner {
         seedRiskAssessments();
         seedAlerts();
         seedRedistributions();
-        log.info("✅ Database seeding complete!");
+        log.info("✅ Jaipur 5-Hospital Health Grid Database Seeding Complete!");
     }
 
     private void seedUsers() {
@@ -52,252 +52,345 @@ public class DataSeeder implements CommandLineRunner {
             User.builder().name("Dr. Priya Verma").email("district@arogyagrid.com")
                 .password(passwordEncoder.encode("district123"))
                 .role(UserRole.DISTRICT_OFFICER).district("Jaipur").active(true).build(),
-            User.builder().name("Nurse Anita Singh").email("facility@arogyagrid.com")
+            User.builder().name("Dr. Ashok Gehlot").email("sms.manager@arogyagrid.com")
                 .password(passwordEncoder.encode("facility123"))
                 .role(UserRole.FACILITY_MANAGER).district("Jaipur")
-                .facilityId("F-1").active(true).build(),
-            User.builder().name("Pharmacist Ravi Kumar").email("pharma@arogyagrid.com")
+                .facilityId("FAC-JPR-001").active(true).build(),
+            User.builder().name("Pharmacist Suresh Kumar").email("amer.pharma@arogyagrid.com")
                 .password(passwordEncoder.encode("pharma123"))
                 .role(UserRole.PHARMACIST_OPERATOR).district("Jaipur")
-                .facilityId("F-3").active(true).build()
+                .facilityId("FAC-JPR-005").active(true).build(),
+            User.builder().name("Pharmacist Anita Meena").email("pharma@arogyagrid.com")
+                .password(passwordEncoder.encode("pharma123"))
+                .role(UserRole.PHARMACIST_OPERATOR).district("Jaipur")
+                .facilityId("FAC-JPR-004").active(true).build(),
+            User.builder().name("Nurse Sunita Rao").email("facility@arogyagrid.com")
+                .password(passwordEncoder.encode("facility123"))
+                .role(UserRole.FACILITY_MANAGER).district("Jaipur")
+                .facilityId("FAC-JPR-001").active(true).build()
         ));
-        log.info("  → Seeded 4 users");
+        log.info("  → Seeded 6 system users across roles");
     }
 
     private void seedFacilities() {
         facilityRepo.saveAll(List.of(
-            // Jaipur District
-            Facility.builder().facilityId("F-1").name("Jaipur District Hospital")
+            // 1. SMS Hospital Jaipur
+            Facility.builder().facilityId("FAC-JPR-001")
+                .name("Sawai ManSingh (SMS) Hospital, Jaipur")
                 .type(FacilityType.DISTRICT_HOSPITAL).district("Jaipur")
-                .subDistrict("Jaipur City").totalBeds(500).occupiedBeds(420)
-                .totalStaff(150).activeStaff(135).latitude(26.9124).longitude(75.7873)
-                .address("SMS Hospital Road, Jaipur").contactPhone("0141-2560291")
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-2").name("Jaipur CHC Amber")
+                .subDistrict("Jaipur Central").totalBeds(1500).occupiedBeds(1280)
+                .totalStaff(450).activeStaff(390).latitude(26.8924).longitude(75.8173)
+                .address("JLN Marg, Jaipur, Rajasthan 302004")
+                .contactPhone("0141-2560291").active(true)
+                .lastUpdated(LocalDateTime.now()).build(),
+
+            // 2. JK Lon Hospital Jaipur
+            Facility.builder().facilityId("FAC-JPR-002")
+                .name("JK Lon Hospital, Jaipur")
+                .type(FacilityType.DISTRICT_HOSPITAL).district("Jaipur")
+                .subDistrict("Jaipur Central").totalBeds(800).occupiedBeds(690)
+                .totalStaff(220).activeStaff(195).latitude(26.8950).longitude(75.8150)
+                .address("JLN Marg, Near SMS Medical College, Jaipur 302004")
+                .contactPhone("0141-2564246").active(true)
+                .lastUpdated(LocalDateTime.now()).build(),
+
+            // 3. Zanana Hospital Jaipur
+            Facility.builder().facilityId("FAC-JPR-003")
+                .name("Zanana Hospital, Jaipur")
+                .type(FacilityType.DISTRICT_HOSPITAL).district("Jaipur")
+                .subDistrict("Chandpole").totalBeds(600).occupiedBeds(510)
+                .totalStaff(180).activeStaff(160).latitude(26.9260).longitude(75.8120)
+                .address("Station Road, Chandpole, Jaipur 302001")
+                .contactPhone("0141-2373022").active(true)
+                .lastUpdated(LocalDateTime.now()).build(),
+
+            // 4. CHC Sanganer
+            Facility.builder().facilityId("FAC-JPR-004")
+                .name("CHC Sanganer, Jaipur")
                 .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Amber").totalBeds(100).occupiedBeds(72)
-                .totalStaff(40).activeStaff(35).latitude(26.9855).longitude(75.8513)
-                .address("Amber Fort Road, Jaipur").contactPhone("0141-2530100")
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-3").name("Jaipur PHC Sanganer")
-                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Sanganer").totalBeds(30).occupiedBeds(22)
-                .totalStaff(12).activeStaff(10).latitude(26.8267).longitude(75.7885)
-                .address("Sanganer Main Road, Jaipur").contactPhone("0141-2720050")
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-4").name("Jaipur PHC Chaksu")
-                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Chaksu").totalBeds(25).occupiedBeds(18)
-                .totalStaff(10).activeStaff(8).latitude(26.6058).longitude(75.9471)
-                .address("Chaksu Bus Stand, Jaipur").contactPhone("0141-2850030")
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-5").name("Jaipur PHC Phagi")
-                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Phagi").totalBeds(20).occupiedBeds(15)
-                .totalStaff(8).activeStaff(7).latitude(26.5868).longitude(75.5741)
-                .address("Phagi Town, Jaipur").contactPhone("0141-2870020")
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-6").name("Jaipur CHC Chomu")
-                .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Chomu").totalBeds(80).occupiedBeds(55)
-                .totalStaff(35).activeStaff(30).latitude(27.1661).longitude(75.7217)
-                .address("NH-11, Chomu, Jaipur").contactPhone("01423-220050")
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
+                .subDistrict("Sanganer").totalBeds(100).occupiedBeds(82)
+                .totalStaff(45).activeStaff(38).latitude(26.8267).longitude(75.7885)
+                .address("Tonk Road, Sanganer, Jaipur 302029")
+                .contactPhone("0141-2720050").active(true)
+                .lastUpdated(LocalDateTime.now()).build(),
 
-            // Udaipur District
-            Facility.builder().facilityId("F-7").name("Udaipur District Hospital")
-                .type(FacilityType.DISTRICT_HOSPITAL).district("Udaipur")
-                .subDistrict("Udaipur City").totalBeds(400).occupiedBeds(340)
-                .totalStaff(120).activeStaff(105).latitude(24.5854).longitude(73.7125)
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-8").name("Udaipur PHC Mavli")
-                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Udaipur")
-                .subDistrict("Mavli").totalBeds(25).occupiedBeds(20)
-                .totalStaff(10).activeStaff(9).latitude(24.5000).longitude(73.8500)
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-
-            // Jodhpur District
-            Facility.builder().facilityId("F-9").name("Jodhpur MDM Hospital")
-                .type(FacilityType.DISTRICT_HOSPITAL).district("Jodhpur")
-                .subDistrict("Jodhpur City").totalBeds(600).occupiedBeds(510)
-                .totalStaff(180).activeStaff(160).latitude(26.2389).longitude(73.0243)
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-10").name("Jodhpur PHC Bilara")
-                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Jodhpur")
-                .subDistrict("Bilara").totalBeds(20).occupiedBeds(14)
-                .totalStaff(8).activeStaff(6).latitude(26.1779).longitude(73.7088)
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-
-            // Kota District
-            Facility.builder().facilityId("F-11").name("Kota MBS Hospital")
-                .type(FacilityType.DISTRICT_HOSPITAL).district("Kota")
-                .subDistrict("Kota City").totalBeds(450).occupiedBeds(380)
-                .totalStaff(140).activeStaff(125).latitude(25.2138).longitude(75.8648)
-                .active(true).lastUpdated(LocalDateTime.now()).build(),
-            Facility.builder().facilityId("F-12").name("Kota PHC Ramganj Mandi")
-                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Kota")
-                .subDistrict("Ramganj Mandi").totalBeds(20).occupiedBeds(16)
-                .totalStaff(8).activeStaff(7).latitude(24.6447).longitude(75.9456)
-                .active(true).lastUpdated(LocalDateTime.now()).build()
+            // 5. PHC Amer
+            Facility.builder().facilityId("FAC-JPR-005")
+                .name("PHC Amer, Jaipur")
+                .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Jaipur")
+                .subDistrict("Amer").totalBeds(30).occupiedBeds(24)
+                .totalStaff(15).activeStaff(12).latitude(26.9855).longitude(75.8513)
+                .address("Fort Road, Amer, Jaipur 302028")
+                .contactPhone("0141-2530100").active(true)
+                .lastUpdated(LocalDateTime.now()).build()
         ));
-        log.info("  → Seeded 12 facilities across 4 districts");
+        log.info("  → Seeded 5 Jaipur Hospitals & Health Centers");
     }
 
     private void seedMedicines() {
         medicineRepo.saveAll(List.of(
-            Medicine.builder().medicineId("M-101").name("Amoxicillin 500mg")
-                .genericName("Amoxicillin").category("Antibiotic").unit("Capsules")
+            // Antibiotics
+            Medicine.builder().medicineId("MED-101").name("Amoxicillin 500mg")
+                .genericName("Amoxicillin").category("Antibiotics").unit("Capsules")
                 .criticality(CriticalityLevel.VITAL).minimumStock(400)
-                .maximumStock(2000).reorderLevel(500).leadTimeDays(7)
+                .maximumStock(3000).reorderLevel(600).leadTimeDays(5)
                 .unitPrice(2.50).build(),
-            Medicine.builder().medicineId("M-102").name("ORS Sachets")
-                .genericName("Oral Rehydration Salts").category("Rehydration")
-                .unit("Sachets").criticality(CriticalityLevel.VITAL)
-                .minimumStock(500).maximumStock(3000).reorderLevel(600)
-                .leadTimeDays(5).unitPrice(1.00).build(),
-            Medicine.builder().medicineId("M-103").name("Paracetamol 500mg")
-                .genericName("Paracetamol").category("Analgesic").unit("Tablets")
-                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(1000)
-                .maximumStock(5000).reorderLevel(1200).leadTimeDays(4)
-                .unitPrice(0.50).build(),
-            Medicine.builder().medicineId("M-104").name("Metformin 500mg")
-                .genericName("Metformin").category("Antidiabetic").unit("Tablets")
+            Medicine.builder().medicineId("MED-102").name("Azithromycin 500mg")
+                .genericName("Azithromycin").category("Antibiotics").unit("Tablets")
                 .criticality(CriticalityLevel.ESSENTIAL).minimumStock(300)
-                .maximumStock(1500).reorderLevel(400).leadTimeDays(6)
+                .maximumStock(2000).reorderLevel(500).leadTimeDays(6)
+                .unitPrice(8.00).build(),
+            Medicine.builder().medicineId("MED-103").name("Ciprofloxacin 500mg")
+                .genericName("Ciprofloxacin").category("Antibiotics").unit("Tablets")
+                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(250)
+                .maximumStock(1500).reorderLevel(400).leadTimeDays(5)
+                .unitPrice(3.50).build(),
+            Medicine.builder().medicineId("MED-104").name("Ceftriaxone 1g Inj")
+                .genericName("Ceftriaxone Injection").category("Antibiotics").unit("Vials")
+                .criticality(CriticalityLevel.VITAL).minimumStock(200)
+                .maximumStock(1200).reorderLevel(350).leadTimeDays(4)
+                .unitPrice(22.00).build(),
+
+            // Emergency & Critical
+            Medicine.builder().medicineId("MED-201").name("Medical Oxygen Cylinder (D-Type)")
+                .genericName("Compressed Oxygen").category("Emergency & Critical").unit("Cylinders")
+                .criticality(CriticalityLevel.VITAL).minimumStock(50)
+                .maximumStock(300).reorderLevel(80).leadTimeDays(2)
+                .unitPrice(250.00).build(),
+            Medicine.builder().medicineId("MED-202").name("ORS Sachets")
+                .genericName("Oral Rehydration Salts").category("Emergency & Critical").unit("Sachets")
+                .criticality(CriticalityLevel.VITAL).minimumStock(500)
+                .maximumStock(5000).reorderLevel(800).leadTimeDays(3)
+                .unitPrice(1.00).build(),
+            Medicine.builder().medicineId("MED-203").name("IV Dextrose 5% 500ml")
+                .genericName("Dextrose Fluid").category("Emergency & Critical").unit("Bottles")
+                .criticality(CriticalityLevel.VITAL).minimumStock(300)
+                .maximumStock(2000).reorderLevel(450).leadTimeDays(3)
+                .unitPrice(18.50).build(),
+            Medicine.builder().medicineId("MED-204").name("Inj Adrenaline 1mg/ml")
+                .genericName("Epinephrine Injection").category("Emergency & Critical").unit("Ampoules")
+                .criticality(CriticalityLevel.VITAL).minimumStock(100)
+                .maximumStock(800).reorderLevel(200).leadTimeDays(2)
+                .unitPrice(12.00).build(),
+
+            // Chronic / Daily
+            Medicine.builder().medicineId("MED-301").name("Metformin 500mg")
+                .genericName("Metformin").category("Chronic Care").unit("Tablets")
+                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(500)
+                .maximumStock(4000).reorderLevel(800).leadTimeDays(7)
                 .unitPrice(1.80).build(),
-            Medicine.builder().medicineId("M-105").name("Amlodipine 5mg")
-                .genericName("Amlodipine").category("Antihypertensive")
-                .unit("Tablets").criticality(CriticalityLevel.ESSENTIAL)
-                .minimumStock(200).maximumStock(1000).reorderLevel(300)
-                .leadTimeDays(5).unitPrice(1.20).build(),
-            Medicine.builder().medicineId("M-106").name("Chloroquine Phosphate")
-                .genericName("Chloroquine").category("Antimalarial")
-                .unit("Tablets").criticality(CriticalityLevel.VITAL)
-                .minimumStock(200).maximumStock(800).reorderLevel(250)
-                .leadTimeDays(10).unitPrice(3.00).build()
+            Medicine.builder().medicineId("MED-302").name("Amlodipine 5mg")
+                .genericName("Amlodipine").category("Chronic Care").unit("Tablets")
+                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(400)
+                .maximumStock(3000).reorderLevel(600).leadTimeDays(5)
+                .unitPrice(1.20).build(),
+            Medicine.builder().medicineId("MED-303").name("Atorvastatin 10mg")
+                .genericName("Atorvastatin").category("Chronic Care").unit("Tablets")
+                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(300)
+                .maximumStock(2500).reorderLevel(500).leadTimeDays(6)
+                .unitPrice(3.20).build(),
+            Medicine.builder().medicineId("MED-304").name("Paracetamol 650mg")
+                .genericName("Paracetamol").category("Chronic Care").unit("Tablets")
+                .criticality(CriticalityLevel.VITAL).minimumStock(1000)
+                .maximumStock(8000).reorderLevel(1500).leadTimeDays(3)
+                .unitPrice(0.60).build(),
+
+            // Pediatric & Vaccines
+            Medicine.builder().medicineId("MED-401").name("Paracetamol Syrup 125mg/5ml")
+                .genericName("Pediatric Paracetamol").category("Pediatric & Vaccines").unit("Bottles")
+                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(150)
+                .maximumStock(1000).reorderLevel(250).leadTimeDays(4)
+                .unitPrice(15.00).build(),
+            Medicine.builder().medicineId("MED-402").name("BCG Vaccine")
+                .genericName("Tuberculosis Vaccine").category("Pediatric & Vaccines").unit("Vials")
+                .criticality(CriticalityLevel.VITAL).minimumStock(100)
+                .maximumStock(600).reorderLevel(150).leadTimeDays(7)
+                .unitPrice(45.00).build(),
+            Medicine.builder().medicineId("MED-403").name("Zinc Tablets 20mg")
+                .genericName("Zinc Supplement").category("Pediatric & Vaccines").unit("Tablets")
+                .criticality(CriticalityLevel.ESSENTIAL).minimumStock(300)
+                .maximumStock(2000).reorderLevel(450).leadTimeDays(5)
+                .unitPrice(0.90).build(),
+            Medicine.builder().medicineId("MED-404").name("Rotavirus Vaccine")
+                .genericName("Oral Rotavirus Drops").category("Pediatric & Vaccines").unit("Doses")
+                .criticality(CriticalityLevel.VITAL).minimumStock(80)
+                .maximumStock(500).reorderLevel(120).leadTimeDays(8)
+                .unitPrice(85.00).build()
         ));
-        log.info("  → Seeded 6 medicines");
+        log.info("  → Seeded 16 Essential Medicines across 4 medical categories");
     }
 
     private void seedInventoryBalances() {
-        Facility f1 = facilityRepo.findById("F-1").orElseThrow();
-        Facility f3 = facilityRepo.findById("F-3").orElseThrow();
-        Facility f7 = facilityRepo.findById("F-7").orElseThrow();
-        Facility f9 = facilityRepo.findById("F-9").orElseThrow();
+        Facility sms = facilityRepo.findById("FAC-JPR-001").orElseThrow();
+        Facility jkl = facilityRepo.findById("FAC-JPR-002").orElseThrow();
+        Facility zan = facilityRepo.findById("FAC-JPR-003").orElseThrow();
+        Facility chc = facilityRepo.findById("FAC-JPR-004").orElseThrow();
+        Facility phc = facilityRepo.findById("FAC-JPR-005").orElseThrow();
 
-        Medicine m101 = medicineRepo.findById("M-101").orElseThrow();
-        Medicine m102 = medicineRepo.findById("M-102").orElseThrow();
-        Medicine m103 = medicineRepo.findById("M-103").orElseThrow();
-        Medicine m104 = medicineRepo.findById("M-104").orElseThrow();
+        Medicine m101 = medicineRepo.findById("MED-101").orElseThrow();
+        Medicine m104 = medicineRepo.findById("MED-104").orElseThrow();
+        Medicine m201 = medicineRepo.findById("MED-201").orElseThrow();
+        Medicine m202 = medicineRepo.findById("MED-202").orElseThrow();
+        Medicine m301 = medicineRepo.findById("MED-301").orElseThrow();
+        Medicine m304 = medicineRepo.findById("MED-304").orElseThrow();
+        Medicine m401 = medicineRepo.findById("MED-401").orElseThrow();
 
         balanceRepo.saveAll(List.of(
-            InventoryBalance.builder().facility(f1).medicine(m101)
-                .closingStock(1800).avgDailyConsumption(25).coverageDays(72)
-                .stockGap(0).batchNumber("B-2025-001")
+            // SMS Hospital (Large Surplus Center)
+            InventoryBalance.builder().facility(sms).medicine(m101)
+                .closingStock(2800).avgDailyConsumption(45.0).coverageDays(62)
+                .stockGap(0).batchNumber("B-SMS-2026-A1")
                 .lastUpdated(LocalDateTime.now()).build(),
-            InventoryBalance.builder().facility(f3).medicine(m101)
-                .closingStock(70).avgDailyConsumption(15).coverageDays(4)
-                .stockGap(330).batchNumber("B-2025-002")
+            InventoryBalance.builder().facility(sms).medicine(m201)
+                .closingStock(220).avgDailyConsumption(8.0).coverageDays(27)
+                .stockGap(0).batchNumber("B-SMS-OXY-01")
                 .lastUpdated(LocalDateTime.now()).build(),
-            InventoryBalance.builder().facility(f3).medicine(m102)
-                .closingStock(50).avgDailyConsumption(20).coverageDays(2)
-                .stockGap(450).batchNumber("B-2025-003")
+            InventoryBalance.builder().facility(sms).medicine(m202)
+                .closingStock(4500).avgDailyConsumption(60.0).coverageDays(75)
+                .stockGap(0).batchNumber("B-SMS-ORS-99")
                 .lastUpdated(LocalDateTime.now()).build(),
-            InventoryBalance.builder().facility(f1).medicine(m102)
-                .closingStock(2500).avgDailyConsumption(30).coverageDays(83)
-                .stockGap(0).batchNumber("B-2025-004")
+            InventoryBalance.builder().facility(sms).medicine(m304)
+                .closingStock(7500).avgDailyConsumption(120.0).coverageDays(62)
+                .stockGap(0).batchNumber("B-SMS-PCM-02")
                 .lastUpdated(LocalDateTime.now()).build(),
-            InventoryBalance.builder().facility(f7).medicine(m103)
-                .closingStock(3500).avgDailyConsumption(50).coverageDays(70)
-                .stockGap(0).batchNumber("B-2025-005")
+
+            // JK Lon Hospital (Pediatric Specialty)
+            InventoryBalance.builder().facility(jkl).medicine(m401)
+                .closingStock(850).avgDailyConsumption(25.0).coverageDays(34)
+                .stockGap(0).batchNumber("B-JKL-PED-11")
                 .lastUpdated(LocalDateTime.now()).build(),
-            InventoryBalance.builder().facility(f9).medicine(m104)
-                .closingStock(100).avgDailyConsumption(18).coverageDays(5)
-                .stockGap(200).batchNumber("B-2025-006")
+            InventoryBalance.builder().facility(jkl).medicine(m202)
+                .closingStock(2200).avgDailyConsumption(35.0).coverageDays(62)
+                .stockGap(0).batchNumber("B-JKL-ORS-05")
+                .lastUpdated(LocalDateTime.now()).build(),
+
+            // Zanana Hospital (Maternal Center)
+            InventoryBalance.builder().facility(zan).medicine(m104)
+                .closingStock(150).avgDailyConsumption(22.0).coverageDays(6)
+                .stockGap(200).batchNumber("B-ZAN-CEF-08")
+                .lastUpdated(LocalDateTime.now()).build(),
+
+            // CHC Sanganer (Deficit on Oxygen)
+            InventoryBalance.builder().facility(chc).medicine(m201)
+                .closingStock(12).avgDailyConsumption(3.5).coverageDays(3)
+                .stockGap(38).batchNumber("B-CHC-OXY-02")
+                .lastUpdated(LocalDateTime.now()).build(),
+            InventoryBalance.builder().facility(chc).medicine(m301)
+                .closingStock(350).avgDailyConsumption(20.0).coverageDays(17)
+                .stockGap(150).batchNumber("B-CHC-MET-04")
+                .lastUpdated(LocalDateTime.now()).build(),
+
+            // PHC Amer (Critical Shortages)
+            InventoryBalance.builder().facility(phc).medicine(m202)
+                .closingStock(40).avgDailyConsumption(20.0).coverageDays(2)
+                .stockGap(460).batchNumber("B-AMR-ORS-01")
+                .lastUpdated(LocalDateTime.now()).build(),
+            InventoryBalance.builder().facility(phc).medicine(m101)
+                .closingStock(50).avgDailyConsumption(16.0).coverageDays(3)
+                .stockGap(350).batchNumber("B-AMR-AMX-02")
                 .lastUpdated(LocalDateTime.now()).build()
         ));
-        log.info("  → Seeded 6 inventory balances");
+        log.info("  → Seeded inventory balances for all 5 hospitals");
     }
 
     private void seedRiskAssessments() {
-        Facility f3 = facilityRepo.findById("F-3").orElseThrow();
-        Facility f9 = facilityRepo.findById("F-9").orElseThrow();
-        Facility f10 = facilityRepo.findById("F-10").orElseThrow();
+        Facility sms = facilityRepo.findById("FAC-JPR-001").orElseThrow();
+        Facility chc = facilityRepo.findById("FAC-JPR-004").orElseThrow();
+        Facility phc = facilityRepo.findById("FAC-JPR-005").orElseThrow();
+        Facility zan = facilityRepo.findById("FAC-JPR-003").orElseThrow();
 
-        Medicine m101 = medicineRepo.findById("M-101").orElseThrow();
-        Medicine m102 = medicineRepo.findById("M-102").orElseThrow();
-        Medicine m104 = medicineRepo.findById("M-104").orElseThrow();
-        Medicine m106 = medicineRepo.findById("M-106").orElseThrow();
+        Medicine m101 = medicineRepo.findById("MED-101").orElseThrow();
+        Medicine m104 = medicineRepo.findById("MED-104").orElseThrow();
+        Medicine m201 = medicineRepo.findById("MED-201").orElseThrow();
+        Medicine m202 = medicineRepo.findById("MED-202").orElseThrow();
 
         riskRepo.saveAll(List.of(
-            RiskAssessment.builder().facility(f3).medicine(m101)
-                .severity(RiskSeverity.CRITICAL).riskScore(92.5)
-                .daysToStockout(4).currentStock(70).requiredStock(400)
-                .deficit(330).recommendation("Urgent transfer from Jaipur DH")
+            RiskAssessment.builder().facility(phc).medicine(m202)
+                .severity(RiskSeverity.CRITICAL).riskScore(96.5)
+                .daysToStockout(2).currentStock(40).requiredStock(500)
+                .deficit(460).recommendation("Emergency ORS transfer needed from SMS Hospital")
                 .assessedAt(LocalDateTime.now()).build(),
-            RiskAssessment.builder().facility(f3).medicine(m102)
-                .severity(RiskSeverity.CRITICAL).riskScore(96.0)
-                .daysToStockout(2).currentStock(50).requiredStock(500)
-                .deficit(450).recommendation("Emergency ORS replenishment needed")
+
+            RiskAssessment.builder().facility(phc).medicine(m101)
+                .severity(RiskSeverity.CRITICAL).riskScore(93.0)
+                .daysToStockout(3).currentStock(50).requiredStock(400)
+                .deficit(350).recommendation("Urgent Amoxicillin transfer from SMS Hospital")
                 .assessedAt(LocalDateTime.now()).build(),
-            RiskAssessment.builder().facility(f9).medicine(m104)
-                .severity(RiskSeverity.HIGH).riskScore(78.0)
-                .daysToStockout(5).currentStock(100).requiredStock(300)
-                .deficit(200).recommendation("Reorder from state warehouse")
+
+            RiskAssessment.builder().facility(chc).medicine(m201)
+                .severity(RiskSeverity.HIGH).riskScore(82.0)
+                .daysToStockout(3).currentStock(12).requiredStock(50)
+                .deficit(38).recommendation("Oxygen Cylinder supply request dispatched")
                 .assessedAt(LocalDateTime.now()).build(),
-            RiskAssessment.builder().facility(f10).medicine(m106)
-                .severity(RiskSeverity.MEDIUM).riskScore(55.0)
-                .daysToStockout(12).currentStock(80).requiredStock(200)
-                .deficit(120).recommendation("Monitor closely during monsoon")
+
+            RiskAssessment.builder().facility(zan).medicine(m104)
+                .severity(RiskSeverity.MEDIUM).riskScore(64.0)
+                .daysToStockout(6).currentStock(150).requiredStock(350)
+                .deficit(200).recommendation("Reorder Ceftriaxone Vials from state warehouse")
                 .assessedAt(LocalDateTime.now()).build()
         ));
-        log.info("  → Seeded 4 risk assessments");
+        log.info("  → Seeded 4 stockout risk assessments");
     }
 
     private void seedAlerts() {
         alertRepo.saveAll(List.of(
-            Alert.builder().title("CRITICAL: Amoxicillin stockout imminent at Sanganer PHC")
-                .message("Jaipur PHC Sanganer has only 70 units of Amoxicillin 500mg remaining with 4 days to stockout.")
+            Alert.builder().title("CRITICAL: Emergency ORS shortage at PHC Amer")
+                .message("PHC Amer, Jaipur has only 40 ORS sachets remaining with 2 days to stockout.")
                 .severity(RiskSeverity.CRITICAL).status(AlertStatus.ACTIVE)
-                .facilityId("F-3").medicineId("M-101").build(),
-            Alert.builder().title("CRITICAL: ORS depleting at Sanganer PHC")
-                .message("Only 50 ORS sachets remaining at Sanganer PHC. 2 days to stockout.")
+                .facilityId("FAC-JPR-005").medicineId("MED-202").build(),
+
+            Alert.builder().title("CRITICAL: Amoxicillin depleting at PHC Amer")
+                .message("PHC Amer has 50 capsules of Amoxicillin 500mg. 3 days coverage remaining.")
                 .severity(RiskSeverity.CRITICAL).status(AlertStatus.ACTIVE)
-                .facilityId("F-3").medicineId("M-102").build(),
-            Alert.builder().title("HIGH: Metformin running low at Jodhpur MDM")
-                .message("Jodhpur MDM Hospital has 100 units of Metformin with 5 days coverage.")
+                .facilityId("FAC-JPR-005").medicineId("MED-101").build(),
+
+            Alert.builder().title("HIGH: Oxygen Cylinders running low at CHC Sanganer")
+                .message("CHC Sanganer has only 12 Oxygen Cylinders remaining. 3 days until deficit.")
                 .severity(RiskSeverity.HIGH).status(AlertStatus.ACTIVE)
-                .facilityId("F-9").medicineId("M-104").build(),
-            Alert.builder().title("Bed occupancy above 85% at Jaipur DH")
-                .message("Jaipur District Hospital at 84% bed occupancy. Consider patient diversion plan.")
+                .facilityId("FAC-JPR-004").medicineId("MED-201").build(),
+
+            Alert.builder().title("ICU Bed Occupancy at 85% in SMS Hospital")
+                .message("SMS Hospital ICU ward is at 85% capacity. Patient diversion plan advised.")
                 .severity(RiskSeverity.MEDIUM).status(AlertStatus.ACKNOWLEDGED)
-                .facilityId("F-1").build()
+                .facilityId("FAC-JPR-001").build()
         ));
-        log.info("  → Seeded 4 alerts");
+        log.info("  → Seeded 4 active alerts");
     }
 
     private void seedRedistributions() {
-        Facility f1 = facilityRepo.findById("F-1").orElseThrow();
-        Facility f3 = facilityRepo.findById("F-3").orElseThrow();
-        Medicine m101 = medicineRepo.findById("M-101").orElseThrow();
-        Medicine m102 = medicineRepo.findById("M-102").orElseThrow();
+        Facility sms = facilityRepo.findById("FAC-JPR-001").orElseThrow();
+        Facility chc = facilityRepo.findById("FAC-JPR-004").orElseThrow();
+        Facility phc = facilityRepo.findById("FAC-JPR-005").orElseThrow();
+
+        Medicine m101 = medicineRepo.findById("MED-101").orElseThrow();
+        Medicine m201 = medicineRepo.findById("MED-201").orElseThrow();
+        Medicine m202 = medicineRepo.findById("MED-202").orElseThrow();
 
         redistRepo.saveAll(List.of(
             RedistributionRecommendation.builder()
-                .recommendationId("REC-2026-001")
-                .sourceFacility(f1).targetFacility(f3).medicine(m101)
-                .transferQuantity(330).sourceSurplus(1400).targetDeficit(330)
-                .priorityScore(92.5).status(RecommendationStatus.PENDING_APPROVAL)
-                .justification("Critical stockout risk at PHC Sanganer. DH has 1400 surplus units.")
+                .recommendationId("REC-JPR-2026-01")
+                .sourceFacility(sms).targetFacility(phc).medicine(m202)
+                .transferQuantity(460).sourceSurplus(4500).targetDeficit(460)
+                .priorityScore(96.5).status(RecommendationStatus.PENDING_APPROVAL)
+                .justification("Emergency ORS transfer from SMS Hospital (4500 surplus) to PHC Amer (2 days coverage).")
                 .build(),
+
             RedistributionRecommendation.builder()
-                .recommendationId("REC-2026-002")
-                .sourceFacility(f1).targetFacility(f3).medicine(m102)
-                .transferQuantity(450).sourceSurplus(2000).targetDeficit(450)
-                .priorityScore(96.0).status(RecommendationStatus.PENDING_APPROVAL)
-                .justification("Emergency ORS transfer needed. PHC Sanganer has only 2 days coverage.")
+                .recommendationId("REC-JPR-2026-02")
+                .sourceFacility(sms).targetFacility(phc).medicine(m101)
+                .transferQuantity(350).sourceSurplus(2800).targetDeficit(350)
+                .priorityScore(93.0).status(RecommendationStatus.PENDING_APPROVAL)
+                .justification("Urgent Amoxicillin transfer from SMS Hospital to PHC Amer.")
+                .build(),
+
+            RedistributionRecommendation.builder()
+                .recommendationId("REC-JPR-2026-03")
+                .sourceFacility(sms).targetFacility(chc).medicine(m201)
+                .transferQuantity(25).sourceSurplus(220).targetDeficit(25)
+                .priorityScore(82.0).status(RecommendationStatus.PENDING_APPROVAL)
+                .justification("Medical Oxygen transfer from SMS Hospital (220 cylinders) to CHC Sanganer.")
                 .build()
         ));
-        log.info("  → Seeded 2 redistribution recommendations");
+        log.info("  → Seeded 3 inter-hospital redistribution recommendations");
     }
 }
