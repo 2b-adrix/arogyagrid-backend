@@ -29,12 +29,19 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (userRepo.count() > 0) {
-            log.info("Database already populated. Skipping seeding...");
-            return;
+        log.info("🌱 Refreshing & Seeding Comprehensive Jaipur Multi-Hospital Health Grid Dataset...");
+        try {
+            redistRepo.deleteAll();
+            alertRepo.deleteAll();
+            riskRepo.deleteAll();
+            balanceRepo.deleteAll();
+            medicineRepo.deleteAll();
+            userRepo.deleteAll();
+            facilityRepo.deleteAll();
+        } catch (Exception e) {
+            log.warn("Non-fatal error clearing tables prior to seeding: {}", e.getMessage());
         }
 
-        log.info("🌱 Seeding Comprehensive Jaipur Multi-Hospital Health Grid Dataset...");
         seedUsers();
         seedFacilities();
         seedMedicines();
@@ -417,7 +424,7 @@ public class DataSeeder implements CommandLineRunner {
 
             // JK Lon Pediatric High Vaccine & Syrup Balances
             InventoryBalance.builder().facility(jkl).medicine(pcmSyrup)
-                .closingStock(950).avgDailyConsumption(28.0).coverageDays(33)
+                .closingStock(950).avgDailyConsumption(25.0).coverageDays(33)
                 .stockGap(0).batchNumber("B-JKL-PED-12")
                 .lastUpdated(LocalDateTime.now()).build(),
 
@@ -454,7 +461,6 @@ public class DataSeeder implements CommandLineRunner {
         Medicine cef = medicineRepo.findById("MED-104").orElseThrow();
         Medicine oxy = medicineRepo.findById("MED-201").orElseThrow();
         Medicine ors = medicineRepo.findById("MED-202").orElseThrow();
-        Medicine met = medicineRepo.findById("MED-301").orElseThrow();
 
         riskRepo.saveAll(List.of(
             RiskAssessment.builder().facility(phcAmer).medicine(ors)
