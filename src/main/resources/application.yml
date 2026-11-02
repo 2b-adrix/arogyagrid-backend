@@ -1,0 +1,54 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: ArogyaGrid
+
+  # ── Neon Cloud PostgreSQL Database ──
+  datasource:
+    url: jdbc:postgresql://ep-noisy-hall-b4y8orcn-pooler.c-6.us-east-2.aws.neon.tech/neondb?sslmode=require
+    driver-class-name: org.postgresql.Driver
+    username: neondb_owner
+    password: npg_EolGI1QFp4yu
+
+  sql:
+    init:
+      mode: never
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# ── JWT Configuration ──
+app:
+  jwt:
+    secret: ArogyaGridSuperSecretKeyThatIsAtLeast256BitsLongForHS256Algorithm2024!
+    expiration-ms: 604800000
+
+# ── Logging ──
+logging:
+  level:
+    com.arogyagrid: DEBUG
+    org.springframework.security: DEBUG
+
+# ── Actuator ──
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+
+# ── OpenAPI ──
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
