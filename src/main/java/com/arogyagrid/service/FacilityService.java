@@ -57,6 +57,8 @@ public class FacilityService {
                 .totalStaff(f.getTotalStaff())
                 .activeStaff(f.getActiveStaff())
                 .staffingRatio(staffRatio)
+                .latitude(f.getLatitude())
+                .longitude(f.getLongitude())
                 .address(f.getAddress())
                 .contactPhone(f.getContactPhone())
                 .build();

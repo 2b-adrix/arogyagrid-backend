@@ -20,6 +20,8 @@ public class FacilityResponse {
     private int totalStaff;
     private int activeStaff;
     private double staffingRatio;
+    private double latitude;
+    private double longitude;
     private String address;
     private String contactPhone;
 }
