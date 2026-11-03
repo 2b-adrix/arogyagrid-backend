@@ -102,25 +102,25 @@ public class DataSeeder implements CommandLineRunner {
             Facility.builder().facilityId("FAC-JPR-003")
                 .name("Zanana Maternity Hospital, Jaipur")
                 .type(FacilityType.DISTRICT_HOSPITAL).district("Jaipur")
-                .subDistrict("Chandpole").totalBeds(600).occupiedBeds(510)
-                .totalStaff(180).activeStaff(160).latitude(26.9260).longitude(75.8120)
-                .address("Station Road, Chandpole, Jaipur 302001").contactPhone("0141-2373022")
+                .subDistrict("Jaipur West").totalBeds(600).occupiedBeds(510)
+                .totalStaff(180).activeStaff(155).latitude(26.9260).longitude(75.8120)
+                .address("Station Road, Sindhi Camp, Jaipur 302006").contactPhone("0141-2373221")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-004")
                 .name("Mahila Chikitsalaya, Jaipur")
                 .type(FacilityType.DISTRICT_HOSPITAL).district("Jaipur")
-                .subDistrict("Sanganeri Gate").totalBeds(500).occupiedBeds(430)
-                .totalStaff(160).activeStaff(145).latitude(26.9150).longitude(75.8200)
-                .address("Sanganeri Gate, Jaipur 302003").contactPhone("0141-2601240")
+                .subDistrict("Jaipur Central").totalBeds(450).occupiedBeds(380)
+                .totalStaff(140).activeStaff(120).latitude(26.9150).longitude(75.8200)
+                .address("Sanganeri Gate, Johari Bazar, Jaipur 302003").contactPhone("0141-2603388")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-005")
                 .name("RUHS College of Medical Sciences & Hospital, Jaipur")
                 .type(FacilityType.DISTRICT_HOSPITAL).district("Jaipur")
-                .subDistrict("Pratap Nagar").totalBeds(750).occupiedBeds(610)
-                .totalStaff(210).activeStaff(185).latitude(26.8020).longitude(75.8100)
-                .address("Sector 11, Pratap Nagar, Jaipur 302033").contactPhone("0141-2791928")
+                .subDistrict("Pratap Nagar").totalBeds(1200).occupiedBeds(980)
+                .totalStaff(380).activeStaff(330).latitude(26.8020).longitude(75.8100)
+                .address("Kumbha Marg, Sector 18, Pratap Nagar, Jaipur 302033").contactPhone("0141-2795555")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             // Community Health Centres (CHCs)
@@ -129,23 +129,23 @@ public class DataSeeder implements CommandLineRunner {
                 .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
                 .subDistrict("Sanganer").totalBeds(100).occupiedBeds(82)
                 .totalStaff(45).activeStaff(38).latitude(26.8267).longitude(75.7885)
-                .address("Tonk Road, Sanganer, Jaipur 302029").contactPhone("0141-2720050")
+                .address("Near Sanganer Stadium, Sanganer, Jaipur 302029").contactPhone("0141-2731210")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-007")
                 .name("CHC Chomu, Jaipur")
                 .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Chomu").totalBeds(100).occupiedBeds(78)
-                .totalStaff(40).activeStaff(35).latitude(27.1661).longitude(75.7217)
-                .address("NH-11, Chomu, Jaipur 303702").contactPhone("01423-220050")
+                .subDistrict("Chomu").totalBeds(80).occupiedBeds(65)
+                .totalStaff(35).activeStaff(30).latitude(27.1661).longitude(75.7217)
+                .address("Near Bus Stand, Chomu, Jaipur 303702").contactPhone("01423-220045")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-008")
                 .name("CHC Amber, Jaipur")
                 .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Amber").totalBeds(80).occupiedBeds(62)
-                .totalStaff(35).activeStaff(30).latitude(26.9880).longitude(75.8550)
-                .address("Amber Fort Road, Jaipur 302028").contactPhone("0141-2530200")
+                .subDistrict("Amber").totalBeds(60).occupiedBeds(48)
+                .totalStaff(28).activeStaff(24).latitude(26.9880).longitude(75.8550)
+                .address("Delhi-Jaipur Highway, Amber, Jaipur 302028").contactPhone("0141-2530180")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-009")
@@ -153,24 +153,24 @@ public class DataSeeder implements CommandLineRunner {
                 .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
                 .subDistrict("Kotputli").totalBeds(120).occupiedBeds(95)
                 .totalStaff(50).activeStaff(42).latitude(27.7020).longitude(76.2010)
-                .address("NH-48, Kotputli, Jaipur 303108").contactPhone("01421-222030")
+                .address("NH-48, Kotputli, Jaipur 303108").contactPhone("01421-222010")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-010")
                 .name("CHC Shahpura, Jaipur")
                 .type(FacilityType.COMMUNITY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Shahpura").totalBeds(90).occupiedBeds(70)
-                .totalStaff(38).activeStaff(32).latitude(27.3850).longitude(75.9620)
-                .address("Delhi Road, Shahpura, Jaipur 303103").contactPhone("01422-225010")
+                .subDistrict("Shahpura").totalBeds(70).occupiedBeds(54)
+                .totalStaff(30).activeStaff(26).latitude(27.3850).longitude(75.9620)
+                .address("Delhi Road, Shahpura, Jaipur 303103").contactPhone("01422-225015")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             // Primary Health Centres (PHCs)
             Facility.builder().facilityId("FAC-JPR-011")
                 .name("PHC Amer, Jaipur")
                 .type(FacilityType.PRIMARY_HEALTH_CENTRE).district("Jaipur")
-                .subDistrict("Amer").totalBeds(30).occupiedBeds(24)
+                .subDistrict("Amber").totalBeds(30).occupiedBeds(28)
                 .totalStaff(15).activeStaff(12).latitude(26.9855).longitude(75.8513)
-                .address("Fort Road, Amer, Jaipur 302028").contactPhone("0141-2530100")
+                .address("Old Amer Fort Road, Amer, Jaipur 302028").contactPhone("0141-2531020")
                 .active(true).lastUpdated(LocalDateTime.now()).build(),
 
             Facility.builder().facilityId("FAC-JPR-012")
@@ -281,51 +281,51 @@ public class DataSeeder implements CommandLineRunner {
             Medicine.builder().medicineId("MED-302").name("Amlodipine 5mg")
                 .genericName("Amlodipine").category("Chronic Care").unit("Tablets")
                 .criticality(CriticalityLevel.ESSENTIAL).minimumStock(400)
-                .maximumStock(3000).reorderLevel(600).leadTimeDays(5).unitPrice(1.20).build(),
+                .maximumStock(3000).reorderLevel(600).leadTimeDays(6).unitPrice(2.20).build(),
 
             Medicine.builder().medicineId("MED-303").name("Atorvastatin 10mg")
                 .genericName("Atorvastatin").category("Chronic Care").unit("Tablets")
                 .criticality(CriticalityLevel.ESSENTIAL).minimumStock(300)
-                .maximumStock(2500).reorderLevel(500).leadTimeDays(6).unitPrice(3.20).build(),
+                .maximumStock(2500).reorderLevel(500).leadTimeDays(6).unitPrice(5.50).build(),
 
             Medicine.builder().medicineId("MED-304").name("Paracetamol 650mg")
                 .genericName("Paracetamol").category("Chronic Care").unit("Tablets")
                 .criticality(CriticalityLevel.VITAL).minimumStock(1000)
-                .maximumStock(8000).reorderLevel(1500).leadTimeDays(3).unitPrice(0.60).build(),
+                .maximumStock(8000).reorderLevel(1500).leadTimeDays(3).unitPrice(1.20).build(),
 
             Medicine.builder().medicineId("MED-305").name("Insulin Regular 100IU/ml")
-                .genericName("Human Insulin Injection").category("Chronic Care").unit("Vials")
+                .genericName("Human Insulin").category("Chronic Care").unit("Vials")
                 .criticality(CriticalityLevel.VITAL).minimumStock(50)
-                .maximumStock(400).reorderLevel(100).leadTimeDays(4).unitPrice(140.00).build(),
+                .maximumStock(400).reorderLevel(100).leadTimeDays(4).unitPrice(145.00).build(),
 
             Medicine.builder().medicineId("MED-306").name("Losartan Potassium 50mg")
                 .genericName("Losartan").category("Chronic Care").unit("Tablets")
                 .criticality(CriticalityLevel.ESSENTIAL).minimumStock(300)
-                .maximumStock(2000).reorderLevel(450).leadTimeDays(5).unitPrice(2.40).build(),
+                .maximumStock(2000).reorderLevel(450).leadTimeDays(6).unitPrice(4.00).build(),
 
-            // Pediatric & Vaccines
+            // Pediatric & Maternal Health
             Medicine.builder().medicineId("MED-401").name("Paracetamol Syrup 125mg/5ml")
-                .genericName("Pediatric Paracetamol").category("Pediatric & Vaccines").unit("Bottles")
+                .genericName("Paracetamol Pediatric").category("Pediatric Care").unit("Bottles")
                 .criticality(CriticalityLevel.ESSENTIAL).minimumStock(150)
-                .maximumStock(1000).reorderLevel(250).leadTimeDays(4).unitPrice(15.00).build(),
+                .maximumStock(1000).reorderLevel(250).leadTimeDays(4).unitPrice(28.00).build(),
 
             Medicine.builder().medicineId("MED-402").name("BCG Vaccine")
-                .genericName("Tuberculosis Vaccine").category("Pediatric & Vaccines").unit("Vials")
+                .genericName("Bacillus Calmette–Guérin").category("Immunization").unit("Doses")
                 .criticality(CriticalityLevel.VITAL).minimumStock(100)
-                .maximumStock(600).reorderLevel(150).leadTimeDays(7).unitPrice(45.00).build(),
+                .maximumStock(600).reorderLevel(200).leadTimeDays(7).unitPrice(45.00).build(),
 
             Medicine.builder().medicineId("MED-403").name("Zinc Tablets 20mg")
-                .genericName("Zinc Supplement").category("Pediatric & Vaccines").unit("Tablets")
+                .genericName("Zinc Dispersible").category("Pediatric Care").unit("Tablets")
                 .criticality(CriticalityLevel.ESSENTIAL).minimumStock(300)
-                .maximumStock(2000).reorderLevel(450).leadTimeDays(5).unitPrice(0.90).build(),
+                .maximumStock(2000).reorderLevel(500).leadTimeDays(5).unitPrice(1.50).build(),
 
             Medicine.builder().medicineId("MED-404").name("Rotavirus Vaccine")
-                .genericName("Oral Rotavirus Drops").category("Pediatric & Vaccines").unit("Doses")
+                .genericName("Rotavirus Oral").category("Immunization").unit("Vials")
                 .criticality(CriticalityLevel.VITAL).minimumStock(80)
-                .maximumStock(500).reorderLevel(120).leadTimeDays(8).unitPrice(85.00).build(),
+                .maximumStock(500).reorderLevel(150).leadTimeDays(7).unitPrice(180.00).build(),
 
             Medicine.builder().medicineId("MED-405").name("Pentavalent Vaccine")
-                .genericName("DTP-HepB-Hib Vaccine").category("Pediatric & Vaccines").unit("Vials")
+                .genericName("DTP-HepB-Hib").category("Immunization").unit("Doses")
                 .criticality(CriticalityLevel.VITAL).minimumStock(100)
                 .maximumStock(700).reorderLevel(180).leadTimeDays(7).unitPrice(60.00).build(),
 
@@ -355,99 +355,101 @@ public class DataSeeder implements CommandLineRunner {
     }
 
     private void seedInventoryBalances() {
-        Facility sms = facilityRepo.findById("FAC-JPR-001").orElseThrow();
-        Facility jkl = facilityRepo.findById("FAC-JPR-002").orElseThrow();
-        Facility zan = facilityRepo.findById("FAC-JPR-003").orElseThrow();
-        Facility mhl = facilityRepo.findById("FAC-JPR-004").orElseThrow();
-        Facility ruh = facilityRepo.findById("FAC-JPR-005").orElseThrow();
-        Facility chcSanganer = facilityRepo.findById("FAC-JPR-006").orElseThrow();
-        Facility chcChomu = facilityRepo.findById("FAC-JPR-007").orElseThrow();
-        Facility phcAmer = facilityRepo.findById("FAC-JPR-011").orElseThrow();
-        Facility phcChaksu = facilityRepo.findById("FAC-JPR-012").orElseThrow();
-
+        List<Facility> facilities = facilityRepo.findAll();
         List<Medicine> medicines = medicineRepo.findAll();
         List<InventoryBalance> balances = new ArrayList<>();
 
-        for (Medicine med : medicines) {
-            // SMS Hospital (Major Surplus Warehouse)
-            balances.add(InventoryBalance.builder().facility(sms).medicine(med)
-                .closingStock(2500 + (med.getMedicineId().hashCode() % 1500))
-                .avgDailyConsumption(45.0).coverageDays(55).stockGap(0)
-                .batchNumber("B-SMS-2026-" + med.getMedicineId().substring(4))
-                .lastUpdated(LocalDateTime.now()).build());
+        // Generate tailored, realistic inventory profiles for every single one of the 15 hospitals
+        for (Facility fac : facilities) {
+            String facId = fac.getFacilityId();
 
-            // RUHS Hospital (Secondary Hub)
-            balances.add(InventoryBalance.builder().facility(ruh).medicine(med)
-                .closingStock(1500 + (med.getMedicineId().hashCode() % 800))
-                .avgDailyConsumption(30.0).coverageDays(50).stockGap(0)
-                .batchNumber("B-RUH-2026-" + med.getMedicineId().substring(4))
-                .lastUpdated(LocalDateTime.now()).build());
+            for (Medicine med : medicines) {
+                String medId = med.getMedicineId();
+                int stock;
+                double dailyCons;
+                int covDays;
+
+                if (facId.equals("FAC-JPR-001")) {
+                    // SMS Hospital - State Capital Major Surplus Hub
+                    stock = (int) (med.getMaximumStock() * 0.95);
+                    dailyCons = 45.0;
+                } else if (facId.equals("FAC-JPR-005")) {
+                    // RUHS Hospital - Secondary Surplus Hub
+                    stock = (int) (med.getMaximumStock() * 0.75);
+                    dailyCons = 30.0;
+                } else if (facId.equals("FAC-JPR-002")) {
+                    // JK Lon - Pediatric Hospital
+                    if (med.getCategory().contains("Pediatric") || med.getCategory().contains("Immunization")) {
+                        stock = (int) (med.getMaximumStock() * 0.85);
+                        dailyCons = 25.0;
+                    } else {
+                        stock = (int) (med.getMinimumStock() * 1.5);
+                        dailyCons = 15.0;
+                    }
+                } else if (facId.equals("FAC-JPR-003")) {
+                    // Zanana Hospital - Maternity Specialty
+                    if (medId.equals("MED-104")) { // Low Ceftriaxone
+                        stock = 120;
+                        dailyCons = 20.0;
+                    } else if (med.getCategory().contains("Emergency")) {
+                        stock = (int) (med.getMaximumStock() * 0.60);
+                        dailyCons = 18.0;
+                    } else {
+                        stock = (int) (med.getMinimumStock() * 1.2);
+                        dailyCons = 12.0;
+                    }
+                } else if (facId.equals("FAC-JPR-011")) {
+                    // PHC Amer - Simulated Crisis Facility
+                    if (medId.equals("MED-202")) { // Critical ORS
+                        stock = 35;
+                        dailyCons = 18.0;
+                    } else if (medId.equals("MED-101")) { // Critical Amoxicillin
+                        stock = 40;
+                        dailyCons = 15.0;
+                    } else {
+                        stock = (int) (med.getMinimumStock() * 0.45);
+                        dailyCons = 8.0;
+                    }
+                } else if (facId.equals("FAC-JPR-006")) {
+                    // CHC Sanganer - Oxygen & Metformin Shortage
+                    if (medId.equals("MED-201")) { // Oxygen Cylinders
+                        stock = 10;
+                        dailyCons = 3.0;
+                    } else if (medId.equals("MED-301")) { // Metformin
+                        stock = 180;
+                        dailyCons = 22.0;
+                    } else {
+                        stock = (int) (med.getMinimumStock() * 0.90);
+                        dailyCons = 14.0;
+                    }
+                } else if (fac.getType() == FacilityType.COMMUNITY_HEALTH_CENTRE) {
+                    // CHCs (Chomu, Amber, Kotputli, Shahpura)
+                    stock = (int) (med.getMinimumStock() * 1.3);
+                    dailyCons = 12.0;
+                } else {
+                    // PHCs (Chaksu, Phagi, Bassi, Jamwa Ramgarh)
+                    stock = (int) (med.getMinimumStock() * 0.65);
+                    dailyCons = 6.0;
+                }
+
+                covDays = dailyCons > 0 ? (int) (stock / dailyCons) : 99;
+                int stockGap = Math.max(0, med.getMinimumStock() - stock);
+
+                balances.add(InventoryBalance.builder()
+                    .facility(fac)
+                    .medicine(med)
+                    .closingStock(stock)
+                    .avgDailyConsumption(dailyCons)
+                    .coverageDays(covDays)
+                    .stockGap(stockGap)
+                    .batchNumber("B-" + facId.substring(8) + "-2026-" + medId.substring(4))
+                    .lastUpdated(LocalDateTime.now())
+                    .build());
+            }
         }
 
-        // Specific targeted balances for risk simulation
-        Medicine amx = medicineRepo.findById("MED-101").orElseThrow();
-        Medicine oxy = medicineRepo.findById("MED-201").orElseThrow();
-        Medicine ors = medicineRepo.findById("MED-202").orElseThrow();
-        Medicine cef = medicineRepo.findById("MED-104").orElseThrow();
-        Medicine met = medicineRepo.findById("MED-301").orElseThrow();
-        Medicine pcmSyrup = medicineRepo.findById("MED-401").orElseThrow();
-        Medicine rotavirus = medicineRepo.findById("MED-404").orElseThrow();
-
-        balances.addAll(List.of(
-            // PHC Amer Critical Shortages
-            InventoryBalance.builder().facility(phcAmer).medicine(ors)
-                .closingStock(35).avgDailyConsumption(18.0).coverageDays(2)
-                .stockGap(465).batchNumber("B-AMR-ORS-01")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            InventoryBalance.builder().facility(phcAmer).medicine(amx)
-                .closingStock(40).avgDailyConsumption(15.0).coverageDays(3)
-                .stockGap(360).batchNumber("B-AMR-AMX-02")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            // CHC Sanganer Low Oxygen
-            InventoryBalance.builder().facility(chcSanganer).medicine(oxy)
-                .closingStock(10).avgDailyConsumption(3.0).coverageDays(3)
-                .stockGap(40).batchNumber("B-CHC-OXY-02")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            InventoryBalance.builder().facility(chcSanganer).medicine(met)
-                .closingStock(180).avgDailyConsumption(22.0).coverageDays(8)
-                .stockGap(320).batchNumber("B-CHC-MET-05")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            // Zanana Hospital Low Ceftriaxone
-            InventoryBalance.builder().facility(zan).medicine(cef)
-                .closingStock(120).avgDailyConsumption(20.0).coverageDays(6)
-                .stockGap(230).batchNumber("B-ZAN-CEF-09")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            // JK Lon Pediatric High Vaccine & Syrup Balances
-            InventoryBalance.builder().facility(jkl).medicine(pcmSyrup)
-                .closingStock(950).avgDailyConsumption(25.0).coverageDays(33)
-                .stockGap(0).batchNumber("B-JKL-PED-12")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            InventoryBalance.builder().facility(jkl).medicine(rotavirus)
-                .closingStock(380).avgDailyConsumption(12.0).coverageDays(31)
-                .stockGap(0).batchNumber("B-JKL-ROTA-04")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            // PHC Chaksu Balances
-            InventoryBalance.builder().facility(phcChaksu).medicine(amx)
-                .closingStock(80).avgDailyConsumption(12.0).coverageDays(6)
-                .stockGap(220).batchNumber("B-CKS-AMX-01")
-                .lastUpdated(LocalDateTime.now()).build(),
-
-            // CHC Chomu Balances
-            InventoryBalance.builder().facility(chcChomu).medicine(oxy)
-                .closingStock(15).avgDailyConsumption(2.5).coverageDays(6)
-                .stockGap(35).batchNumber("B-CHM-OXY-03")
-                .lastUpdated(LocalDateTime.now()).build()
-        ));
-
         balanceRepo.saveAll(balances);
-        log.info("  → Seeded " + balances.size() + " inventory balance records across 15 hospitals");
+        log.info("  → Seeded " + balances.size() + " complete inventory balances (26 medicines × 15 facilities)");
     }
 
     private void seedRiskAssessments() {
